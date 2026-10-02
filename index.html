@@ -4,549 +4,529 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Nova University | Learn Without Limits</title>
-
+    <title>Attendify | Student Attendance System</title>
     <link rel="stylesheet" href="style.css">
-
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
-
 <body>
 
-<!-- ANNOUNCEMENT BAR -->
-<div class="announcement">
-    ✳ Admissions Open for 2026-27
-    <a href="#admissions">Apply Now ↗</a>
-</div>
+<div class="app">
 
-<!-- NAVIGATION -->
-<header class="header">
-
-    <a href="#home" class="logo">
-        <span class="logo-icon">N✳</span>
-        <span>NOVA <small>UNIVERSITY</small></span>
-    </a>
-
-    <input type="checkbox" id="menu-toggle">
-    <label for="menu-toggle" class="menu-btn">☰</label>
-
-    <nav>
-        <a href="#home">Home</a>
-        <a href="#about">About</a>
-        <a href="#courses">Courses</a>
-        <a href="#campus">Campus Life</a>
-        <a href="#events">Events</a>
-        <a href="#contact">Contact</a>
-        <a href="#admissions" class="nav-btn">Apply Now ↗</a>
-    </nav>
-
-</header>
-
-<!-- HERO SECTION -->
-<section class="hero" id="home">
-
-    <div class="hero-content">
-
-        <p class="tagline">THINK BIG. BEGIN HERE.</p>
-
-        <h1>
-            Your Future<br>
-            Doesn't Have<br>
-            To <span>Wait.</span>
-        </h1>
-
-        <p class="hero-description">
-            Discover your passion, develop your skills and
-            create a future without limits. Your journey
-            towards success begins here.
-        </p>
-
-        <div class="hero-buttons">
-            <a href="#courses" class="btn-primary">
-                Explore Courses ↗
-            </a>
-
-            <a href="#about" class="btn-outline">
-                Discover Us →
-            </a>
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+        <div class="brand">
+            <div class="brand-icon">A</div>
+            <div>
+                <h2>Attendify</h2>
+                <small>ATTENDANCE SYSTEM</small>
+            </div>
         </div>
 
-    </div>
+        <p class="menu-label">MAIN MENU</p>
 
-    <div class="hero-badge">
-        <span>CURIOUS MINDS</span>
-        <strong>✳</strong>
-        <span>WELCOME</span>
-    </div>
+        <nav>
+            <button class="nav-link active" data-page="dashboard">
+                <span>▦</span> Dashboard
+            </button>
 
-</section>
+            <button class="nav-link" data-page="students">
+                <span>♙</span> Student Registration
+            </button>
 
-<!-- MOVING TEXT -->
-<div class="ticker">
-    <div class="ticker-content">
-        LEARN WITH PURPOSE ✳
-        BUILD WHAT'S NEXT ✳
-        MAKE A DIFFERENCE ✳
-        LEARN WITH PURPOSE ✳
-        BUILD WHAT'S NEXT ✳
-    </div>
-</div>
+            <button class="nav-link" data-page="mark">
+                <span>✓</span> Mark Attendance
+            </button>
 
-<!-- ABOUT SECTION -->
-<section class="about section" id="about">
+            <button class="nav-link" data-page="records">
+                <span>▤</span> View Attendance
+            </button>
 
-    <p class="section-label">01 / ABOUT OUR UNIVERSITY</p>
+            <button class="nav-link" data-page="reports">
+                <span>▥</span> Attendance Reports
+            </button>
+        </nav>
 
-    <div class="about-content">
-
-        <h2>
-            Big Ideas Need<br>
-            <span>Room To Grow.</span>
-        </h2>
-
-        <div class="about-text">
-            <p>
-                At Nova University, education goes beyond
-                classrooms. We encourage students to explore,
-                innovate, develop leadership and transform
-                their ideas into reality.
-            </p>
-
-            <a href="#campus" class="text-link">
-                Know More About Us →
-            </a>
+        <div class="sidebar-bottom">
+            <div class="profile">
+                <div class="avatar">AD</div>
+                <div>
+                    <strong>Administrator</strong>
+                    <small>College Admin</small>
+                </div>
+            </div>
         </div>
+    </aside>
 
-    </div>
+    <!-- MAIN CONTENT -->
+    <main class="main">
 
-    <div class="stats">
+        <header class="topbar">
+            <div>
+                <p class="top-label">STUDENT MANAGEMENT</p>
+                <h2 id="page-heading">Dashboard</h2>
+            </div>
 
-        <div class="stat">
-            <h3>25+</h3>
-            <p>Academic Pathways</p>
-        </div>
+            <div class="top-date" id="today-date"></div>
+        </header>
 
-        <div class="stat">
-            <h3>40+</h3>
-            <p>Student Communities</p>
-        </div>
+        <!-- DASHBOARD -->
+        <section class="page active" id="dashboard">
 
-        <div class="stat">
-            <h3>12:1</h3>
-            <p>Student Mentor Focus</p>
-        </div>
+            <div class="welcome">
+                <div>
+                    <p>WELCOME BACK, ADMIN 👋</p>
+                    <h1>Attendance Overview</h1>
+                    <span>Manage students and track daily attendance.</span>
+                </div>
+                <div class="welcome-icon">✦</div>
+            </div>
 
-        <div class="stat">
-            <h3>100%</h3>
-            <p>Focus on Growth</p>
-        </div>
+            <div class="stats-grid">
 
-    </div>
+                <div class="stat-card">
+                    <div class="stat-icon purple">♙</div>
+                    <p>Total Students</p>
+                    <h2 id="total-students">0</h2>
+                    <small>Registered students</small>
+                </div>
 
-    <p class="notice">
-        Replace sample statistics with verified college information.
-    </p>
+                <div class="stat-card">
+                    <div class="stat-icon green">✓</div>
+                    <p>Present Today</p>
+                    <h2 id="present-today">0</h2>
+                    <small>Students present</small>
+                </div>
 
-</section>
+                <div class="stat-card">
+                    <div class="stat-icon red">✕</div>
+                    <p>Absent Today</p>
+                    <h2 id="absent-today">0</h2>
+                    <small>Students absent</small>
+                </div>
 
-<!-- COURSES SECTION -->
-<section class="courses section" id="courses">
+                <div class="stat-card">
+                    <div class="stat-icon orange">%</div>
+                    <p>Attendance Rate</p>
+                    <h2 id="attendance-rate">0%</h2>
+                    <small>Today's attendance</small>
+                </div>
 
-    <p class="section-label">02 / EXPLORE YOUR FUTURE</p>
+            </div>
 
-    <div class="section-heading">
-        <h2>
-            Choose Your<br>
-            <span>Next Move.</span>
-        </h2>
+            <div class="dashboard-grid">
 
-        <p>
-            Discover programmes designed to prepare you
-            for tomorrow's opportunities.
-        </p>
-    </div>
+                <div class="panel">
+                    <div class="panel-heading">
+                        <div>
+                            <h3>Quick Actions</h3>
+                            <p>Manage your attendance system</p>
+                        </div>
+                    </div>
 
-    <div class="course-container">
+                    <div class="quick-actions">
+                        <button class="action-card" data-go="students">
+                            <span class="action-icon purple">＋</span>
+                            <strong>Register Student</strong>
+                            <small>Add a new student</small>
+                        </button>
 
-        <div class="course-card dark-card">
+                        <button class="action-card" data-go="mark">
+                            <span class="action-icon green">✓</span>
+                            <strong>Mark Attendance</strong>
+                            <small>Record today's attendance</small>
+                        </button>
 
-            <span class="course-number">01 — TECHNOLOGY</span>
+                        <button class="action-card" data-go="records">
+                            <span class="action-icon orange">▤</span>
+                            <strong>View Records</strong>
+                            <small>Check attendance history</small>
+                        </button>
 
-            <div class="course-icon">⌘</div>
+                        <button class="action-card" data-go="reports">
+                            <span class="action-icon blue">▥</span>
+                            <strong>Generate Reports</strong>
+                            <small>Check attendance percentage</small>
+                        </button>
+                    </div>
+                </div>
 
-            <h3>
-                Computer Science<br>
-                & Engineering
-            </h3>
+                <div class="panel">
+                    <div class="panel-heading">
+                        <div>
+                            <h3>Today's Summary</h3>
+                            <p>Attendance distribution</p>
+                        </div>
+                    </div>
 
-            <p>
-                Learn programming, software development,
-                algorithms and modern computing.
-            </p>
+                    <div class="summary-circle" id="summary-circle">
+                        <div>
+                            <h2 id="summary-percent">0%</h2>
+                            <small>Present</small>
+                        </div>
+                    </div>
 
-            <a href="#contact">Explore Course ↗</a>
+                    <div class="legend">
+                        <span><i class="dot present-dot"></i> Present</span>
+                        <span><i class="dot absent-dot"></i> Absent</span>
+                    </div>
+                </div>
 
-        </div>
+            </div>
 
-        <div class="course-card lime-card">
+            <div class="panel recent-panel">
+                <div class="panel-heading">
+                    <div>
+                        <h3>Recently Registered Students</h3>
+                        <p>Latest student registrations</p>
+                    </div>
+                    <button class="text-button" data-go="students">
+                        View All →
+                    </button>
+                </div>
 
-            <span class="course-number">02 — INTELLIGENCE</span>
+                <div class="table-wrap">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Roll Number</th>
+                                <th>Student Name</th>
+                                <th>Department</th>
+                                <th>Year</th>
+                            </tr>
+                        </thead>
+                        <tbody id="recent-students"></tbody>
+                    </table>
+                </div>
+            </div>
 
-            <div class="course-icon">✳</div>
+        </section>
 
-            <h3>
-                Artificial Intelligence<br>
-                & Machine Learning
-            </h3>
+        <!-- STUDENT REGISTRATION -->
+        <section class="page" id="students">
 
-            <p>
-                Explore intelligent systems, machine
-                learning and the future of AI.
-            </p>
+            <div class="page-intro">
+                <div>
+                    <h2>Student Registration</h2>
+                    <p>Add, update and manage student information.</p>
+                </div>
+                <button class="primary-btn" id="show-form">
+                    + Add Student
+                </button>
+            </div>
 
-            <a href="#contact">Explore Course ↗</a>
+            <div class="panel form-panel" id="student-form-panel" hidden>
+                <h3 id="form-title">Register New Student</h3>
 
-        </div>
+                <form id="student-form">
 
-        <div class="course-card orange-card">
+                    <input type="hidden" id="edit-id">
 
-            <span class="course-number">03 — DIGITAL</span>
+                    <div class="form-grid">
 
-            <div class="course-icon">◈</div>
+                        <div class="field">
+                            <label>Student Name *</label>
+                            <input type="text" id="student-name"
+                                   placeholder="Enter full name" required>
+                        </div>
 
-            <h3>
-                Information<br>
-                Technology
-            </h3>
+                        <div class="field">
+                            <label>Roll Number *</label>
+                            <input type="text" id="roll-number"
+                                   placeholder="Enter roll number" required>
+                        </div>
 
-            <p>
-                Develop skills in networks, databases,
-                cybersecurity and digital technology.
-            </p>
+                        <div class="field">
+                            <label>Email Address</label>
+                            <input type="email" id="student-email"
+                                   placeholder="Enter email">
+                        </div>
 
-            <a href="#contact">Explore Course ↗</a>
+                        <div class="field">
+                            <label>Department *</label>
+                            <select id="department" required>
+                                <option value="">Select Department</option>
+                                <option>CSE</option>
+                                <option>IT</option>
+                                <option>AI & ML</option>
+                                <option>ECE</option>
+                                <option>EEE</option>
+                                <option>Mechanical</option>
+                                <option>Civil</option>
+                            </select>
+                        </div>
 
-        </div>
+                        <div class="field">
+                            <label>Academic Year *</label>
+                            <select id="student-year" required>
+                                <option value="">Select Year</option>
+                                <option>1st Year</option>
+                                <option>2nd Year</option>
+                                <option>3rd Year</option>
+                                <option>4th Year</option>
+                            </select>
+                        </div>
 
-    </div>
+                        <div class="field">
+                            <label>Phone Number</label>
+                            <input type="tel" id="student-phone"
+                                   placeholder="Enter phone number">
+                        </div>
 
-</section>
+                    </div>
 
-<!-- CAMPUS LIFE -->
-<section class="campus" id="campus">
+                    <div class="form-buttons">
+                        <button type="submit" class="primary-btn">
+                            Save Student
+                        </button>
+                        <button type="button" class="secondary-btn"
+                                id="cancel-form">Cancel</button>
+                    </div>
 
-    <div class="campus-image"></div>
+                </form>
+            </div>
 
-    <div class="campus-content">
+            <div class="panel">
+                <div class="panel-heading">
+                    <div>
+                        <h3>Registered Students</h3>
+                        <p id="student-count">0 students registered</p>
+                    </div>
 
-        <p class="section-label">03 / CAMPUS LIFE</p>
+                    <input type="search" id="student-search"
+                           class="search-input"
+                           placeholder="Search students...">
+                </div>
 
-        <h2>
-            Find Your<br>
-            Kind Of <span>People.</span>
-        </h2>
+                <div class="table-wrap">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Roll No.</th>
+                                <th>Student Name</th>
+                                <th>Department</th>
+                                <th>Year</th>
+                                <th>Email</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="student-table"></tbody>
+                    </table>
+                </div>
+            </div>
 
-        <p>
-            College life is more than attending lectures.
-            Discover new interests, participate in events,
-            make friends and create unforgettable memories.
-        </p>
+        </section>
 
-        <a href="#events" class="btn-primary">
-            Explore Campus Life ↗
-        </a>
+        <!-- MARK ATTENDANCE -->
+        <section class="page" id="mark">
 
-    </div>
+            <div class="page-intro">
+                <div>
+                    <h2>Mark Attendance</h2>
+                    <p>Record student attendance for a selected date.</p>
+                </div>
+            </div>
 
-</section>
+            <div class="panel">
+                <div class="attendance-toolbar">
+                    <div class="field">
+                        <label>Select Date</label>
+                        <input type="date" id="attendance-date">
+                    </div>
 
-<!-- STUDENT EXPERIENCE -->
-<section class="experience section">
+                    <div class="field">
+                        <label>Filter Department</label>
+                        <select id="department-filter">
+                            <option value="">All Departments</option>
+                            <option>CSE</option>
+                            <option>IT</option>
+                            <option>AI & ML</option>
+                            <option>ECE</option>
+                            <option>EEE</option>
+                            <option>Mechanical</option>
+                            <option>Civil</option>
+                        </select>
+                    </div>
+                </div>
 
-    <p class="section-label">04 / STUDENT EXPERIENCE</p>
+                <div class="attendance-summary">
+                    <span>Students: <strong id="mark-total">0</strong></span>
+                    <span class="present-text">Present: <strong id="mark-present">0</strong></span>
+                    <span class="absent-text">Absent: <strong id="mark-absent">0</strong></span>
+                </div>
 
-    <h2>
-        There's More To<br>
-        <span>Your Story.</span>
-    </h2>
+                <div class="table-wrap">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Roll No.</th>
+                                <th>Student Name</th>
+                                <th>Department</th>
+                                <th>Attendance Status</th>
+                            </tr>
+                        </thead>
+                        <tbody id="mark-table"></tbody>
+                    </table>
+                </div>
 
-    <div class="experience-container">
+                <div class="save-row">
+                    <button class="primary-btn" id="save-attendance">
+                        Save Attendance ✓
+                    </button>
+                </div>
+            </div>
 
-        <div class="experience-card">
+        </section>
 
-            <img
-                src="https://images.unsplash.com/photo-1523580494863-6f3031224c94?w=900"
-                alt="Students collaborating">
+        <!-- VIEW ATTENDANCE -->
+        <section class="page" id="records">
 
-            <div class="experience-text">
-                <small>01 / CONNECT</small>
-                <h3>Find Your Community</h3>
-                <p>
-                    Meet people who inspire you and
-                    learn together.
+            <div class="page-intro">
+                <div>
+                    <h2>Attendance Records</h2>
+                    <p>View and filter all saved attendance records.</p>
+                </div>
+            </div>
+
+            <div class="panel">
+                <div class="filter-toolbar">
+
+                    <div class="field">
+                        <label>Choose Date</label>
+                        <input type="date" id="record-date">
+                    </div>
+
+                    <div class="field">
+                        <label>Search Roll Number</label>
+                        <input type="search" id="record-search"
+                               placeholder="Search roll number">
+                    </div>
+
+                    <div class="field">
+                        <label>Status</label>
+                        <select id="record-status">
+                            <option value="">All Status</option>
+                            <option>Present</option>
+                            <option>Absent</option>
+                        </select>
+                    </div>
+
+                    <button class="secondary-btn" id="clear-record-filters">
+                        Clear Filters
+                    </button>
+
+                </div>
+
+                <div class="table-wrap">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Roll No.</th>
+                                <th>Student Name</th>
+                                <th>Department</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody id="record-table"></tbody>
+                    </table>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- REPORTS -->
+        <section class="page" id="reports">
+
+            <div class="page-intro">
+                <div>
+                    <h2>Attendance Reports</h2>
+                    <p>Analyse student attendance and generate reports.</p>
+                </div>
+
+                <button class="primary-btn" id="download-report">
+                    ↓ Download CSV
+                </button>
+            </div>
+
+            <div class="panel">
+                <div class="report-toolbar">
+                    <div class="field">
+                        <label>Filter by Department</label>
+                        <select id="report-department">
+                            <option value="">All Departments</option>
+                            <option>CSE</option>
+                            <option>IT</option>
+                            <option>AI & ML</option>
+                            <option>ECE</option>
+                            <option>EEE</option>
+                            <option>Mechanical</option>
+                            <option>Civil</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="stats-grid report-stats">
+
+                    <div class="stat-card">
+                        <div class="stat-icon purple">♙</div>
+                        <p>Total Students</p>
+                        <h2 id="report-total">0</h2>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon green">✓</div>
+                        <p>Average Attendance</p>
+                        <h2 id="report-average">0%</h2>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon red">!</div>
+                        <p>Below 75%</p>
+                        <h2 id="report-low">0</h2>
+                    </div>
+
+                </div>
+
+                <div class="panel-heading report-heading">
+                    <div>
+                        <h3>Individual Student Report</h3>
+                        <p>Attendance percentage for each student.</p>
+                    </div>
+                </div>
+
+                <div class="table-wrap">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Roll No.</th>
+                                <th>Student Name</th>
+                                <th>Department</th>
+                                <th>Total Classes</th>
+                                <th>Present</th>
+                                <th>Absent</th>
+                                <th>Percentage</th>
+                            </tr>
+                        </thead>
+                        <tbody id="report-table"></tbody>
+                    </table>
+                </div>
+
+                <p class="report-note">
+                    Attendance percentage = (Present days / Total recorded classes) × 100.
                 </p>
             </div>
 
-        </div>
+        </section>
 
-        <div class="experience-card">
+        <footer class="footer">
+            © 2026 Attendify Student Attendance Management System
+        </footer>
 
-            <img
-                src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=900"
-                alt="Students enjoying college life">
+    </main>
 
-            <div class="experience-text">
-                <small>02 / EXPLORE</small>
-                <h3>Try Something New</h3>
-                <p>
-                    Discover activities, workshops,
-                    competitions and more.
-                </p>
-            </div>
+</div>
 
-        </div>
+<div id="toast" class="toast"></div>
 
-    </div>
-
-</section>
-
-<!-- ADMISSION SECTION -->
-<section class="admission section" id="admissions">
-
-    <div class="admission-content">
-
-        <p class="section-label">05 / ADMISSIONS</p>
-
-        <h2>
-            Ready To Make<br>
-            Something <span>Happen?</span>
-        </h2>
-
-        <p>
-            Your future starts with one decision.
-            Explore the admission process and take
-            the first step towards your goals.
-        </p>
-
-        <a href="#contact" class="btn-primary">
-            Apply For Admission ↗
-        </a>
-
-    </div>
-
-    <div class="admission-circle">
-        <span>GO!</span>
-        <p>YOUR FUTURE<br>IS CALLING</p>
-    </div>
-
-</section>
-
-<!-- FAQ SECTION -->
-<section class="faq section">
-
-    <div>
-        <p class="section-label">06 / FAQ</p>
-
-        <h2>
-            Have Questions?<br>
-            <span>Start Here.</span>
-        </h2>
-    </div>
-
-    <div class="faq-container">
-
-        <details>
-            <summary>
-                How can I apply for admission?
-                <span>+</span>
-            </summary>
-            <p>
-                Contact the admissions office to learn
-                about eligibility and application steps.
-            </p>
-        </details>
-
-        <details>
-            <summary>
-                What courses are available?
-                <span>+</span>
-            </summary>
-            <p>
-                Explore the Courses section to see
-                the programmes listed on this website.
-            </p>
-        </details>
-
-        <details>
-            <summary>
-                Can I visit the campus?
-                <span>+</span>
-            </summary>
-            <p>
-                Contact the college office to ask
-                about campus visits and open days.
-            </p>
-        </details>
-
-        <details>
-            <summary>
-                How can I contact the college?
-                <span>+</span>
-            </summary>
-            <p>
-                Use the contact details and enquiry
-                form in the Contact section.
-            </p>
-        </details>
-
-    </div>
-
-</section>
-
-<!-- EVENTS SECTION -->
-<section class="events section" id="events">
-
-    <p class="section-label">07 / CAMPUS UPDATES</p>
-
-    <div class="section-heading">
-        <h2>
-            Life In<br>
-            <span>Motion.</span>
-        </h2>
-
-        <p>
-            Discover the latest happenings,
-            activities and announcements.
-        </p>
-    </div>
-
-    <div class="event-container">
-
-        <div class="event-card">
-            <div class="event-image event-one"></div>
-            <p>STUDENT LIFE</p>
-            <h3>Campus Activities</h3>
-            <span>Add your college activity details here.</span>
-        </div>
-
-        <div class="event-card">
-            <div class="event-image event-two"></div>
-            <p>WORKSHOPS</p>
-            <h3>Learn Something New</h3>
-            <span>Add your workshop announcements here.</span>
-        </div>
-
-        <div class="event-card">
-            <div class="event-image event-three"></div>
-            <p>UPCOMING EVENTS</p>
-            <h3>Save The Date</h3>
-            <span>Add your college event information here.</span>
-        </div>
-
-    </div>
-
-</section>
-
-<!-- CONTACT SECTION -->
-<section class="contact section" id="contact">
-
-    <div class="contact-heading">
-
-        <p class="section-label">08 / CONTACT US</p>
-
-        <h2>
-            Let's Start<br>
-            A <span>Conversation.</span>
-        </h2>
-
-        <p>
-            Have questions about courses or admissions?
-            Send us an enquiry.
-        </p>
-
-        <div class="contact-details">
-            <p><strong>Address</strong><br>
-                Your College Name, Your City, India
-            </p>
-
-            <p><strong>Email</strong><br>
-                admissions@yourcollege.edu
-            </p>
-
-            <p><strong>Phone</strong><br>
-                +91 00000 00000
-            </p>
-        </div>
-
-    </div>
-
-    <form class="contact-form"
-          action="mailto:admissions@yourcollege.edu"
-          method="post"
-          enctype="text/plain">
-
-        <label for="name">Your Name</label>
-        <input id="name" type="text" name="Name"
-               placeholder="Enter your name" required>
-
-        <label for="email">Email Address</label>
-        <input id="email" type="email" name="Email"
-               placeholder="Enter your email" required>
-
-        <label for="interest">Interested In</label>
-        <select id="interest" name="Interest">
-            <option>Course Information</option>
-            <option>Admissions</option>
-            <option>Campus Visit</option>
-            <option>Other Enquiry</option>
-        </select>
-
-        <label for="message">Your Message</label>
-        <textarea id="message" name="Message"
-                  rows="4" placeholder="Write your message..."
-                  required></textarea>
-
-        <button type="submit" class="btn-submit">
-            Send Enquiry ↗
-        </button>
-
-        <small>
-            This demo form opens your email application.
-            Replace the email with your college's official address.
-        </small>
-
-    </form>
-
-</section>
-
-<!-- FOOTER -->
-<footer class="footer">
-
-    <div class="footer-top">
-
-        <a href="#home" class="logo footer-logo">
-            <span class="logo-icon">N✳</span>
-            <span>NOVA <small>UNIVERSITY</small></span>
-        </a>
-
-        <h3>
-            Curious Minds.<br>
-            Limitless Possibilities.
-        </h3>
-
-        <a href="#home" class="back-top">
-            BACK TO TOP ↑
-        </a>
-
-    </div>
-
-    <div class="footer-bottom">
-        <p>© 2026 Nova University. All rights reserved.</p>
-        <p>LEARN · CREATE · CONTRIBUTE</p>
-    </div>
-
-</footer>
-
+<script src="script.js"></script>
 </body>
 </html>
