@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from 'react';
-import { Check, Copy, Download, Printer } from 'lucide-react';
+import { Check, Copy, Download, Presentation, Printer } from 'lucide-react';
 import type { Course } from '../types';
 import {
   computeDailyHistory,
@@ -7,6 +7,7 @@ import {
   formatDisplayDate,
   formatShortDate,
 } from '../utils/attendance';
+import { downloadCoursePresentation } from '../utils/exportPptx';
 
 interface ReportViewProps {
   course: Course;
@@ -21,6 +22,7 @@ export const ReportView: React.FC<ReportViewProps> = ({
 }) => {
   const [hoveredDate, setHoveredDate] = useState<string | null>(null);
   const [copiedSummary, setCopiedSummary] = useState(false);
+  const [exportingPptx, setExportingPptx] = useState(false);
 
   const report = useMemo(() => {
     const entries = course.students.map((student) => ({
@@ -118,42 +120,38 @@ export const ReportView: React.FC<ReportViewProps> = ({
         </p>
       </div>
 
-      <div className="bg-white border border-slate-200 rounded-lg grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-slate-200">
-        <div className="px-5 py-4">
-          <p className="text-xs font-medium text-slate-500">Class Average</p>
-          <p className="mt-1.5 text-2xl font-semibold text-slate-900 font-mono tabular-nums">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div className="bg-indigo-600 text-white rounded-xl p-5">
+          <p className="text-xs font-medium text-indigo-100">Class Average</p>
+          <p className="mt-1.5 text-3xl font-bold font-mono tabular-nums">
             {report.average}%
           </p>
-          <p className="mt-1 text-xs text-slate-500">
+          <p className="mt-1 text-xs text-indigo-100">
             Across {course.students.length} enrolled students
           </p>
         </div>
 
-        <div className="px-5 py-4">
-          <p className="text-xs font-medium text-slate-500">Highest Attendance</p>
-          <p className="mt-1.5 text-2xl font-semibold text-emerald-700 font-mono tabular-nums">
+        <div className="bg-emerald-600 text-white rounded-xl p-5">
+          <p className="text-xs font-medium text-emerald-100">Best Attendance</p>
+          <p className="mt-1.5 text-3xl font-bold font-mono tabular-nums">
             {report.best ? `${report.best.stats.percentage}%` : '—'}
           </p>
-          <p className="mt-1 text-xs text-slate-500 truncate">
+          <p className="mt-1 text-xs text-emerald-100 truncate">
             {report.best
               ? `${report.best.student.name} (#${report.best.student.roll})`
               : 'No data'}
           </p>
         </div>
 
-        <div className="px-5 py-4">
-          <p className="text-xs font-medium text-slate-500">Below 75% Threshold</p>
-          <p
-            className={`mt-1.5 text-2xl font-semibold font-mono tabular-nums ${
-              report.shortage.length > 0 ? 'text-rose-700' : 'text-emerald-700'
-            }`}
-          >
+        <div className={`${report.shortage.length > 0 ? 'bg-rose-600' : 'bg-sky-600'} text-white rounded-xl p-5`}>
+          <p className="text-xs font-medium text-white/85">Below 75% Alert</p>
+          <p className="mt-1.5 text-3xl font-bold font-mono tabular-nums">
             {report.shortage.length}
           </p>
-          <p className="mt-1 text-xs text-slate-500">
+          <p className="mt-1 text-xs text-white/85">
             {report.shortage.length === 0
-              ? 'All students meet minimum threshold'
-              : 'Requires attendance advisory notice'}
+              ? 'All students meet 75% requirement'
+              : 'Students need extra classes'}
           </p>
         </div>
       </div>
@@ -201,7 +199,13 @@ export const ReportView: React.FC<ReportViewProps> = ({
                       <div className="w-full max-w-[28px] bg-slate-100 rounded-t h-32 flex items-end overflow-hidden">
                         <div
                           className={`w-full rounded-t transition-colors ${
-                            isHovered ? 'bg-blue-700' : 'bg-slate-700 group-hover:bg-blue-700'
+                            isHovered
+                              ? 'bg-indigo-600'
+                              : item.rate >= 85
+                                ? 'bg-emerald-500 group-hover:bg-indigo-600'
+                                : item.rate >= 75
+                                  ? 'bg-sky-500 group-hover:bg-indigo-600'
+                                  : 'bg-rose-500 group-hover:bg-indigo-600'
                           }`}
                           style={{ height: `${Math.max(item.rate, 4)}%` }}
                         />
@@ -379,6 +383,22 @@ export const ReportView: React.FC<ReportViewProps> = ({
             >
               <Download className="w-3.5 h-3.5" aria-hidden="true" />
               <span>Download CSV</span>
+            </button>
+            <button
+              type="button"
+              disabled={exportingPptx}
+              onClick={async () => {
+                setExportingPptx(true);
+                try {
+                  await downloadCoursePresentation(course, selectedDate);
+                } finally {
+                  setExportingPptx(false);
+                }
+              }}
+              className="inline-flex items-center gap-1.5 px-3.5 py-2 text-xs font-medium rounded-md border border-slate-200 bg-white text-slate-700 hover:bg-slate-50 disabled:opacity-50 transition-colors whitespace-nowrap shrink-0 cursor-pointer"
+            >
+              <Presentation className="w-3.5 h-3.5" aria-hidden="true" />
+              <span>{exportingPptx ? 'Building PPT...' : 'Download PPT (.pptx)'}</span>
             </button>
             <button
               type="button"

@@ -37,11 +37,16 @@ function loadInitialCourses(): Course[] {
   return createInitialCourses();
 }
 
-const NAV_ITEMS: Array<{ id: NavSection; label: string; icon: React.ComponentType<{ className?: string }> }> = [
-  { id: 'mark', label: 'Mark Attendance', icon: CheckSquare },
-  { id: 'directory', label: 'Attendance Register', icon: Users },
-  { id: 'enroll', label: 'Register Student', icon: UserPlus },
-  { id: 'report', label: 'Reports & Analytics', icon: BarChart3 },
+const NAV_ITEMS: Array<{
+  id: NavSection;
+  label: string;
+  helper: string;
+  icon: React.ComponentType<{ className?: string }>;
+}> = [
+  { id: 'mark', label: 'Mark Attendance', helper: 'Click Present or Absent for each student below.', icon: CheckSquare },
+  { id: 'directory', label: 'View Attendance', helper: 'Check attendance records or click a student to edit.', icon: Users },
+  { id: 'enroll', label: 'Register Student', helper: 'Add new students to your class roster.', icon: UserPlus },
+  { id: 'report', label: 'Attendance Report', helper: 'View class average, bar charts, and download reports.', icon: BarChart3 },
 ];
 
 export const App: React.FC = () => {
@@ -315,20 +320,21 @@ export const App: React.FC = () => {
     setSelectedDate(`${ny}-${nm}-${nd}`);
   };
 
-  const currentNavLabel =
-    NAV_ITEMS.find((item) => item.id === activeSection)?.label ?? 'Mark Attendance';
+  const activeNavItem =
+    NAV_ITEMS.find((item) => item.id === activeSection) ?? NAV_ITEMS[0];
+  const currentNavLabel = activeNavItem.label;
 
   const sidebarContent = (
-    <div className="flex flex-col h-full bg-white border-r border-slate-200">
-      <div className="px-5 py-4 border-b border-slate-200 flex items-center justify-between">
-        <span className="font-display text-lg font-bold tracking-tight text-slate-900 whitespace-nowrap shrink-0">
-          ClassLedger
+    <div className="flex flex-col h-full bg-indigo-700 text-white">
+      <div className="px-5 py-4 border-b border-indigo-600 flex items-center justify-between">
+        <span className="font-display text-lg font-bold tracking-tight text-white whitespace-nowrap shrink-0">
+          Student Attendance
         </span>
         <button
           type="button"
           onClick={() => setMobileNavOpen(false)}
           aria-label="Close navigation menu"
-          className="lg:hidden p-1.5 text-slate-500 hover:text-slate-900 rounded-md cursor-pointer"
+          className="lg:hidden p-1.5 text-indigo-200 hover:text-white rounded-md cursor-pointer"
         >
           <X className="w-4 h-4" />
         </button>
@@ -337,7 +343,7 @@ export const App: React.FC = () => {
       <div className="p-4 space-y-6 flex-1 overflow-y-auto">
         <div>
           <div className="flex items-center justify-between px-2 mb-2">
-            <span className="text-xs font-medium text-slate-500">Courses</span>
+            <span className="text-xs font-medium text-indigo-200">Classes</span>
             <button
               type="button"
               onClick={() => {
@@ -345,13 +351,13 @@ export const App: React.FC = () => {
                 setCourseFormError(null);
               }}
               aria-label="Create new course"
-              className="inline-flex items-center gap-1 text-xs font-medium text-blue-700 hover:text-blue-800 cursor-pointer"
+              className="inline-flex items-center gap-1 text-xs font-medium text-white hover:text-indigo-100 cursor-pointer"
             >
               <Plus className="w-3.5 h-3.5" aria-hidden="true" />
               <span>New</span>
             </button>
           </div>
-          <div className="space-y-1">
+          <div className="space-y-1.5">
             {courses.map((course) => {
               const isSelected = course.id === activeCourse.id;
               return (
@@ -362,21 +368,21 @@ export const App: React.FC = () => {
                     setActiveCourseId(course.id);
                     setMobileNavOpen(false);
                   }}
-                  className={`w-full text-left px-2.5 py-2 rounded-md transition-colors cursor-pointer ${
+                  className={`w-full text-left px-3 py-2 rounded-lg transition-colors cursor-pointer ${
                     isSelected
-                      ? 'bg-blue-50 text-blue-900 font-medium'
-                      : 'text-slate-700 hover:bg-slate-50'
+                      ? 'bg-indigo-900/70 text-white font-medium border border-indigo-400/40'
+                      : 'text-indigo-100 hover:bg-indigo-600/60'
                   }`}
                 >
                   <div className="flex items-center justify-between gap-2">
                     <span className="font-mono text-xs font-semibold truncate">
                       {course.code}
                     </span>
-                    <span className="text-[11px] font-mono tabular-nums text-slate-500">
+                    <span className="text-[11px] font-mono tabular-nums text-indigo-200">
                       {course.students.length}
                     </span>
                   </div>
-                  <div className="text-xs text-slate-600 truncate mt-0.5">
+                  <div className="text-xs text-indigo-100 truncate mt-0.5">
                     {course.name}
                   </div>
                 </button>
@@ -386,10 +392,10 @@ export const App: React.FC = () => {
         </div>
 
         <nav aria-label="Primary workspace navigation">
-          <div className="px-2 mb-2 text-xs font-medium text-slate-500">
-            Workspace
+          <div className="px-2 mb-2 text-xs font-medium text-indigo-200">
+            Menu
           </div>
-          <div className="space-y-1">
+          <div className="space-y-1.5">
             {NAV_ITEMS.map((item) => {
               const Icon = item.icon;
               const isActive = activeSection === item.id;
@@ -401,10 +407,10 @@ export const App: React.FC = () => {
                     setActiveSection(item.id);
                     setMobileNavOpen(false);
                   }}
-                  className={`w-full flex items-center gap-2.5 px-2.5 py-2 text-sm rounded-md transition-colors whitespace-nowrap shrink-0 cursor-pointer ${
+                  className={`w-full flex items-center gap-2.5 px-3 py-2.5 text-sm rounded-lg transition-colors whitespace-nowrap shrink-0 cursor-pointer ${
                     isActive
-                      ? 'bg-slate-900 text-white font-medium'
-                      : 'text-slate-600 hover:bg-slate-100 hover:text-slate-900'
+                      ? 'bg-white text-indigo-700 font-semibold shadow-xs'
+                      : 'text-indigo-100 hover:bg-indigo-600/70 hover:text-white'
                   }`}
                 >
                   <Icon className="w-4 h-4 shrink-0" aria-hidden="true" />
@@ -416,16 +422,16 @@ export const App: React.FC = () => {
         </nav>
       </div>
 
-      <div className="p-4 border-t border-slate-200 space-y-3">
+      <div className="p-4 border-t border-indigo-600 space-y-3">
         <div className="flex items-center gap-2.5 px-1">
-          <div className="w-8 h-8 rounded-md bg-slate-900 text-white flex items-center justify-center text-xs font-semibold shrink-0">
+          <div className="w-8 h-8 rounded-lg bg-white text-indigo-700 flex items-center justify-center text-xs font-bold shrink-0">
             AR
           </div>
           <div className="min-w-0">
-            <p className="text-xs font-medium text-slate-900 truncate">
+            <p className="text-xs font-medium text-white truncate">
               {activeCourse.instructor}
             </p>
-            <p className="text-[11px] text-slate-500 truncate">
+            <p className="text-[11px] text-indigo-200 truncate">
               {activeCourse.term}
             </p>
           </div>
@@ -435,28 +441,28 @@ export const App: React.FC = () => {
           <button
             type="button"
             onClick={() => setConfirmReset(true)}
-            className="w-full inline-flex items-center justify-center gap-1.5 px-3 py-1.5 text-xs font-medium text-slate-600 bg-slate-50 border border-slate-200 rounded-md hover:bg-slate-100 hover:text-slate-900 transition-colors cursor-pointer"
+            className="w-full inline-flex items-center justify-center gap-1.5 px-3 py-1.5 text-xs font-medium text-indigo-100 bg-indigo-800/60 border border-indigo-500/40 rounded-lg hover:bg-indigo-800 hover:text-white transition-colors cursor-pointer"
           >
             <RotateCcw className="w-3 h-3" aria-hidden="true" />
             <span>Reset Sample Data</span>
           </button>
         ) : (
-          <div className="p-2.5 bg-slate-50 border border-slate-200 rounded-md space-y-2">
-            <p className="text-[11px] text-slate-700 font-medium">
-              Restore original demo courses?
+          <div className="p-2.5 bg-indigo-800 border border-indigo-500/40 rounded-lg space-y-2">
+            <p className="text-[11px] text-white font-medium">
+              Restore sample students?
             </p>
             <div className="flex items-center gap-1.5">
               <button
                 type="button"
                 onClick={handleResetDemo}
-                className="flex-1 py-1 text-[11px] font-medium text-white bg-slate-900 rounded hover:bg-slate-800 cursor-pointer"
+                className="flex-1 py-1 text-[11px] font-semibold text-indigo-900 bg-white rounded hover:bg-indigo-50 cursor-pointer"
               >
                 Confirm
               </button>
               <button
                 type="button"
                 onClick={() => setConfirmReset(false)}
-                className="flex-1 py-1 text-[11px] font-medium text-slate-700 bg-white border border-slate-200 rounded hover:bg-slate-50 cursor-pointer"
+                className="flex-1 py-1 text-[11px] font-medium text-white bg-indigo-700 border border-indigo-500 rounded hover:bg-indigo-600 cursor-pointer"
               >
                 Cancel
               </button>
@@ -468,7 +474,7 @@ export const App: React.FC = () => {
   );
 
   return (
-    <div className="min-h-screen flex bg-slate-50 text-slate-900">
+    <div className="min-h-screen flex bg-[#f5f7ff] text-slate-900">
       {/* Desktop Sidebar */}
       <aside className="hidden lg:block w-64 shrink-0 sticky top-0 h-screen no-print">
         {sidebarContent}
@@ -481,7 +487,7 @@ export const App: React.FC = () => {
           onClick={() => setMobileNavOpen(false)}
         >
           <aside
-            className="w-64 h-full bg-white"
+            className="w-64 h-full bg-indigo-700"
             onClick={(e) => e.stopPropagation()}
           >
             {sidebarContent}
@@ -491,44 +497,44 @@ export const App: React.FC = () => {
 
       {/* Main Content */}
       <div className="flex-1 min-w-0 flex flex-col">
-        <header className="sticky top-0 z-30 bg-white border-b border-slate-200 px-4 sm:px-6 py-3 flex items-center justify-between gap-4 no-print">
+        <header className="sticky top-0 z-30 bg-white border-b border-indigo-100 px-4 sm:px-6 py-3 flex items-center justify-between gap-4 no-print">
           <div className="flex items-center gap-3 min-w-0">
             <button
               type="button"
               onClick={() => setMobileNavOpen(true)}
               aria-label="Open navigation menu"
-              className="lg:hidden p-2 -ml-2 text-slate-600 hover:text-slate-900 rounded-md hover:bg-slate-100 cursor-pointer"
+              className="lg:hidden p-2 -ml-2 text-slate-600 hover:text-indigo-700 rounded-md hover:bg-indigo-50 cursor-pointer"
             >
               <Menu className="w-4 h-4" />
             </button>
 
             <div className="flex items-center gap-2 text-sm min-w-0 truncate">
-              <BookOpen className="w-4 h-4 text-slate-400 shrink-0 hidden sm:block" aria-hidden="true" />
+              <BookOpen className="w-4 h-4 text-indigo-600 shrink-0 hidden sm:block" aria-hidden="true" />
               <span className="font-medium text-slate-500 truncate">
                 {activeCourse.code} · {activeCourse.name}
               </span>
               <span className="text-slate-300" aria-hidden="true">
                 /
               </span>
-              <span className="font-semibold text-slate-900 whitespace-nowrap shrink-0">
+              <span className="font-semibold text-indigo-700 whitespace-nowrap shrink-0">
                 {currentNavLabel}
               </span>
             </div>
           </div>
 
           <div className="flex items-center gap-2 shrink-0">
-            <div className="inline-flex items-center border border-slate-200 rounded-md bg-white overflow-hidden">
+            <div className="inline-flex items-center border border-slate-200 rounded-lg bg-white overflow-hidden">
               <button
                 type="button"
                 onClick={() => stepDate(-1)}
                 aria-label="Previous day"
-                className="p-1.5 text-slate-500 hover:text-slate-900 hover:bg-slate-50 border-r border-slate-200 cursor-pointer"
+                className="p-1.5 text-slate-500 hover:text-indigo-700 hover:bg-indigo-50 border-r border-slate-200 cursor-pointer"
               >
                 <ChevronLeft className="w-3.5 h-3.5" />
               </button>
               <label className="relative inline-flex items-center">
                 <Calendar
-                  className="w-3.5 h-3.5 text-slate-400 absolute left-2.5 pointer-events-none"
+                  className="w-3.5 h-3.5 text-indigo-500 absolute left-2.5 pointer-events-none"
                   aria-hidden="true"
                 />
                 <input
@@ -545,7 +551,7 @@ export const App: React.FC = () => {
                 type="button"
                 onClick={() => stepDate(1)}
                 aria-label="Next day"
-                className="p-1.5 text-slate-500 hover:text-slate-900 hover:bg-slate-50 border-l border-slate-200 cursor-pointer"
+                className="p-1.5 text-slate-500 hover:text-indigo-700 hover:bg-indigo-50 border-l border-slate-200 cursor-pointer"
               >
                 <ChevronRight className="w-3.5 h-3.5" />
               </button>
@@ -555,7 +561,7 @@ export const App: React.FC = () => {
               <button
                 type="button"
                 onClick={() => setSelectedDate(todayISO)}
-                className="hidden md:inline-flex px-2.5 py-1.5 text-xs font-medium text-blue-700 bg-blue-50 rounded-md hover:bg-blue-100 transition-colors whitespace-nowrap shrink-0 cursor-pointer"
+                className="hidden md:inline-flex px-2.5 py-1.5 text-xs font-medium text-indigo-700 bg-indigo-50 rounded-lg hover:bg-indigo-100 transition-colors whitespace-nowrap shrink-0 cursor-pointer"
               >
                 Today
               </button>
@@ -564,7 +570,7 @@ export const App: React.FC = () => {
             <button
               type="button"
               onClick={handleExportCsv}
-              className="hidden sm:inline-flex items-center gap-1.5 px-3.5 py-1.5 text-xs font-medium text-white bg-blue-700 rounded-md hover:bg-blue-800 transition-colors whitespace-nowrap shrink-0 cursor-pointer"
+              className="hidden sm:inline-flex items-center gap-1.5 px-3.5 py-1.5 text-xs font-semibold text-white bg-indigo-600 rounded-lg hover:bg-indigo-700 transition-colors whitespace-nowrap shrink-0 cursor-pointer"
             >
               <Download className="w-3.5 h-3.5" aria-hidden="true" />
               <span>Export CSV</span>
@@ -578,8 +584,8 @@ export const App: React.FC = () => {
               <h1 className="text-xl font-bold tracking-tight text-slate-900">
                 {currentNavLabel}
               </h1>
-              <p className="text-xs text-slate-500 mt-1">
-                {activeCourse.code} · {activeCourse.name} · {activeCourse.schedule}
+              <p className="text-xs text-slate-600 mt-1">
+                {activeNavItem.helper} · {activeCourse.code} ({activeCourse.schedule})
               </p>
             </div>
           </div>

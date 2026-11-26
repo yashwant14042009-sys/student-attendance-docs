@@ -23,11 +23,11 @@ interface MarkAttendanceViewProps {
 }
 
 const AVATAR_TONES = [
-  'bg-slate-800 text-white',
-  'bg-blue-900 text-white',
-  'bg-emerald-900 text-white',
-  'bg-amber-900 text-white',
-  'bg-indigo-900 text-white',
+  'bg-indigo-600 text-white',
+  'bg-sky-600 text-white',
+  'bg-emerald-600 text-white',
+  'bg-amber-600 text-white',
+  'bg-rose-600 text-white',
 ];
 
 function getInitials(name: string): string {
@@ -222,10 +222,10 @@ export const MarkAttendanceView: React.FC<MarkAttendanceViewProps> = ({
             type="button"
             onClick={onMarkAllPresent}
             disabled={!hasPending}
-            className="inline-flex items-center gap-1.5 px-3.5 py-2 text-xs font-medium rounded-md bg-blue-700 text-white hover:bg-blue-800 disabled:opacity-40 disabled:cursor-not-allowed transition-colors whitespace-nowrap shrink-0 cursor-pointer"
+            className="inline-flex items-center gap-1.5 px-3.5 py-2 text-xs font-semibold rounded-lg bg-indigo-600 text-white hover:bg-indigo-700 disabled:opacity-40 disabled:cursor-not-allowed transition-colors whitespace-nowrap shrink-0 cursor-pointer"
           >
             <Check className="w-3.5 h-3.5" aria-hidden="true" />
-            <span>Mark Remaining Present</span>
+            <span>Mark All Present</span>
           </button>
           <button
             type="button"

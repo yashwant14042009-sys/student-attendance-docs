@@ -1,4 +1,5 @@
 import React from 'react';
+import { CheckCircle2, Clock, Users, XCircle } from 'lucide-react';
 import { formatDisplayDate } from '../utils/attendance';
 
 interface SummaryStripProps {
@@ -22,47 +23,59 @@ export const SummaryStrip: React.FC<SummaryStripProps> = ({
 
   return (
     <section
-      aria-label="Session summary"
-      className="bg-white border border-slate-200 rounded-lg grid grid-cols-2 lg:grid-cols-4 divide-y lg:divide-y-0 lg:divide-x divide-slate-200"
+      aria-label="Today at a glance"
+      className="grid grid-cols-2 lg:grid-cols-4 gap-3.5"
     >
-      <div className="px-5 py-4">
-        <p className="text-xs font-medium text-slate-500">Enrolled Students</p>
-        <p className="mt-1.5 text-2xl font-semibold tracking-tight text-slate-900 font-mono tabular-nums">
-          {total}
-        </p>
-        <p className="mt-1 text-xs text-slate-500">
-          {formatDisplayDate(selectedDate)}
-        </p>
+      <div className="bg-indigo-600 text-white rounded-xl p-4 sm:p-5 flex items-start justify-between gap-3">
+        <div>
+          <p className="text-xs font-medium text-indigo-100">Total Students</p>
+          <p className="mt-1.5 text-3xl font-bold tracking-tight font-mono tabular-nums">
+            {total}
+          </p>
+          <p className="mt-1 text-xs text-indigo-100">
+            {formatDisplayDate(selectedDate)}
+          </p>
+        </div>
+        <Users className="w-5 h-5 text-indigo-200 shrink-0 mt-0.5" aria-hidden="true" />
       </div>
 
-      <div className="px-5 py-4">
-        <p className="text-xs font-medium text-slate-500">Present</p>
-        <p className="mt-1.5 text-2xl font-semibold tracking-tight text-emerald-700 font-mono tabular-nums">
-          {present}
-        </p>
-        <p className="mt-1 text-xs text-slate-500 tabular-nums">
-          {sessionRate !== null ? `${sessionRate}% of marked` : 'No marks recorded'}
-        </p>
+      <div className="bg-emerald-600 text-white rounded-xl p-4 sm:p-5 flex items-start justify-between gap-3">
+        <div>
+          <p className="text-xs font-medium text-emerald-100">Present</p>
+          <p className="mt-1.5 text-3xl font-bold tracking-tight font-mono tabular-nums">
+            {present}
+          </p>
+          <p className="mt-1 text-xs text-emerald-100 tabular-nums">
+            {sessionRate !== null ? `${sessionRate}% of marked` : 'Ready to mark'}
+          </p>
+        </div>
+        <CheckCircle2 className="w-5 h-5 text-emerald-200 shrink-0 mt-0.5" aria-hidden="true" />
       </div>
 
-      <div className="px-5 py-4">
-        <p className="text-xs font-medium text-slate-500">Absent</p>
-        <p className="mt-1.5 text-2xl font-semibold tracking-tight text-rose-700 font-mono tabular-nums">
-          {absent}
-        </p>
-        <p className="mt-1 text-xs text-slate-500 tabular-nums">
-          {total > 0 ? `${Math.round((absent / total) * 100)}% of roster` : '0% of roster'}
-        </p>
+      <div className="bg-rose-600 text-white rounded-xl p-4 sm:p-5 flex items-start justify-between gap-3">
+        <div>
+          <p className="text-xs font-medium text-rose-100">Absent</p>
+          <p className="mt-1.5 text-3xl font-bold tracking-tight font-mono tabular-nums">
+            {absent}
+          </p>
+          <p className="mt-1 text-xs text-rose-100 tabular-nums">
+            {total > 0 ? `${Math.round((absent / total) * 100)}% of class` : '0% of class'}
+          </p>
+        </div>
+        <XCircle className="w-5 h-5 text-rose-200 shrink-0 mt-0.5" aria-hidden="true" />
       </div>
 
-      <div className="px-5 py-4">
-        <p className="text-xs font-medium text-slate-500">Pending Roll Call</p>
-        <p className="mt-1.5 text-2xl font-semibold tracking-tight text-slate-900 font-mono tabular-nums">
-          {pending}
-        </p>
-        <p className="mt-1 text-xs text-slate-500 tabular-nums">
-          {marked} of {total} recorded
-        </p>
+      <div className="bg-amber-600 text-white rounded-xl p-4 sm:p-5 flex items-start justify-between gap-3">
+        <div>
+          <p className="text-xs font-medium text-amber-100">Not Marked</p>
+          <p className="mt-1.5 text-3xl font-bold tracking-tight font-mono tabular-nums">
+            {pending}
+          </p>
+          <p className="mt-1 text-xs text-amber-100 tabular-nums">
+            {marked} of {total} done
+          </p>
+        </div>
+        <Clock className="w-5 h-5 text-amber-100 shrink-0 mt-0.5" aria-hidden="true" />
       </div>
     </section>
   );

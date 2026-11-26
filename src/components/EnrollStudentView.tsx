@@ -63,7 +63,7 @@ export const EnrollStudentView: React.FC<EnrollStudentViewProps> = ({
     } else {
       setFeedback({
         type: 'ok',
-        text: `${name.trim()} (Roll #${roll.trim()}) was added to ${course.code}.`,
+        text: `${name.trim()} (Roll #${roll.trim()}) was added to ${course.code}!`,
       });
       setName('');
       setRoll('');
@@ -75,7 +75,7 @@ export const EnrollStudentView: React.FC<EnrollStudentViewProps> = ({
     if (parsedBulk.length === 0) return;
     const { added, skipped } = onBulkAddStudents(parsedBulk);
     setBulkResult(
-      `Imported ${added} student${added === 1 ? '' : 's'}${
+      `Added ${added} student${added === 1 ? '' : 's'}${
         skipped > 0 ? ` (${skipped} duplicate roll number${skipped === 1 ? '' : 's'} skipped)` : ''
       }.`
     );
@@ -86,13 +86,13 @@ export const EnrollStudentView: React.FC<EnrollStudentViewProps> = ({
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
-      <div className="lg:col-span-7 bg-white border border-slate-200 rounded-lg p-6">
-        <div className="pb-4 border-b border-slate-200">
-          <h2 className="text-base font-semibold text-slate-900">
+      <div className="lg:col-span-7 bg-white border border-indigo-100 rounded-xl p-6">
+        <div className="pb-4 border-b border-slate-100">
+          <h2 className="text-base font-bold text-slate-900">
             Register New Student
           </h2>
           <p className="mt-1 text-xs text-slate-500">
-            Enroll an individual student into {course.code} · {course.name}
+            Fill in the student details below to add them to {course.code} ({course.name}).
           </p>
         </div>
 
@@ -101,9 +101,9 @@ export const EnrollStudentView: React.FC<EnrollStudentViewProps> = ({
             <div className="sm:col-span-2">
               <label
                 htmlFor="student-name"
-                className="block text-xs font-medium text-slate-700 mb-1.5"
+                className="block text-xs font-semibold text-slate-700 mb-1.5"
               >
-                Full Name
+                Student Name
               </label>
               <input
                 id="student-name"
@@ -111,14 +111,14 @@ export const EnrollStudentView: React.FC<EnrollStudentViewProps> = ({
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 placeholder="e.g., Aadhya Nair"
-                className="w-full px-3.5 py-2.5 text-sm border border-slate-200 rounded-md text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-600/20 focus:border-blue-600"
+                className="w-full px-3.5 py-2.5 text-sm bg-slate-50 border border-slate-200 rounded-lg text-slate-900 placeholder:text-slate-400 focus:bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500/25 focus:border-indigo-600"
               />
             </div>
 
             <div>
               <label
                 htmlFor="student-roll"
-                className="block text-xs font-medium text-slate-700 mb-1.5"
+                className="block text-xs font-semibold text-slate-700 mb-1.5"
               >
                 Roll Number
               </label>
@@ -128,16 +128,16 @@ export const EnrollStudentView: React.FC<EnrollStudentViewProps> = ({
                 value={roll}
                 onChange={(e) => setRoll(e.target.value)}
                 placeholder="e.g., 111"
-                className="w-full px-3.5 py-2.5 text-sm font-mono border border-slate-200 rounded-md text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-600/20 focus:border-blue-600"
+                className="w-full px-3.5 py-2.5 text-sm font-mono bg-slate-50 border border-slate-200 rounded-lg text-slate-900 placeholder:text-slate-400 focus:bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500/25 focus:border-indigo-600"
               />
             </div>
 
             <div>
               <label
                 htmlFor="student-section"
-                className="block text-xs font-medium text-slate-700 mb-1.5"
+                className="block text-xs font-semibold text-slate-700 mb-1.5"
               >
-                Section / Batch
+                Section
               </label>
               <input
                 id="student-section"
@@ -145,24 +145,24 @@ export const EnrollStudentView: React.FC<EnrollStudentViewProps> = ({
                 value={section}
                 onChange={(e) => setSection(e.target.value)}
                 placeholder="Section A"
-                className="w-full px-3.5 py-2.5 text-sm border border-slate-200 rounded-md text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-600/20 focus:border-blue-600"
+                className="w-full px-3.5 py-2.5 text-sm bg-slate-50 border border-slate-200 rounded-lg text-slate-900 placeholder:text-slate-400 focus:bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500/25 focus:border-indigo-600"
               />
             </div>
 
             <div className="sm:col-span-2">
               <label
                 htmlFor="student-email"
-                className="block text-xs font-medium text-slate-700 mb-1.5"
+                className="block text-xs font-semibold text-slate-700 mb-1.5"
               >
-                Institutional Email <span className="text-slate-400 font-normal">(optional)</span>
+                College Email <span className="text-slate-400 font-normal">(optional)</span>
               </label>
               <input
                 id="student-email"
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                placeholder="aadhya.111@university.edu"
-                className="w-full px-3.5 py-2.5 text-sm border border-slate-200 rounded-md text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-600/20 focus:border-blue-600"
+                placeholder="aadhya.111@college.edu"
+                className="w-full px-3.5 py-2.5 text-sm bg-slate-50 border border-slate-200 rounded-lg text-slate-900 placeholder:text-slate-400 focus:bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500/25 focus:border-indigo-600"
               />
             </div>
           </div>
@@ -170,7 +170,7 @@ export const EnrollStudentView: React.FC<EnrollStudentViewProps> = ({
           {feedback && (
             <div
               role="status"
-              className={`px-3.5 py-2.5 rounded-md border text-xs font-medium ${
+              className={`px-3.5 py-2.5 rounded-lg border text-xs font-medium ${
                 feedback.type === 'ok'
                   ? 'bg-emerald-50 border-emerald-200 text-emerald-800'
                   : 'bg-rose-50 border-rose-200 text-rose-800'
@@ -182,26 +182,26 @@ export const EnrollStudentView: React.FC<EnrollStudentViewProps> = ({
 
           <div className="pt-2 flex items-center justify-between gap-4">
             <span className="text-xs text-slate-500 tabular-nums">
-              Current class roster: {course.students.length} students
+              Total in class: {course.students.length} students
             </span>
             <button
               type="submit"
-              className="inline-flex items-center gap-2 px-4 py-2.5 text-xs font-medium text-white bg-blue-700 rounded-md hover:bg-blue-800 transition-colors whitespace-nowrap shrink-0 cursor-pointer"
+              className="inline-flex items-center gap-2 px-5 py-2.5 text-xs font-semibold text-white bg-indigo-600 rounded-lg hover:bg-indigo-700 transition-colors whitespace-nowrap shrink-0 cursor-pointer"
             >
-              <UserPlus className="w-3.5 h-3.5" aria-hidden="true" />
+              <UserPlus className="w-4 h-4" aria-hidden="true" />
               <span>Add Student</span>
             </button>
           </div>
         </form>
       </div>
 
-      <div className="lg:col-span-5 bg-white border border-slate-200 rounded-lg p-6 space-y-4">
-        <div className="pb-4 border-b border-slate-200">
-          <h2 className="text-base font-semibold text-slate-900">
-            Batch Roster Import
+      <div className="lg:col-span-5 bg-white border border-indigo-100 rounded-xl p-6 space-y-4">
+        <div className="pb-4 border-b border-slate-100">
+          <h2 className="text-base font-bold text-slate-900">
+            Quick List Import
           </h2>
           <p className="mt-1 text-xs text-slate-500">
-            Paste one student per line using <code className="font-mono text-slate-700">Roll, Name, Email, Section</code>
+            Add multiple students at once: <code className="font-mono text-indigo-700">Roll, Name, Email, Section</code>
           </p>
         </div>
 
@@ -213,28 +213,28 @@ export const EnrollStudentView: React.FC<EnrollStudentViewProps> = ({
             setBulkResult(null);
           }}
           aria-label="Bulk roster CSV input"
-          placeholder={`112, Devika Iyer, devika.112@university.edu, Section A\n113, Tarun Sinha, tarun.113@university.edu, Section B`}
-          className="w-full px-3.5 py-2.5 text-xs font-mono border border-slate-200 rounded-md text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-600/20 focus:border-blue-600"
+          placeholder={`112, Devika Iyer, devika@college.edu, Section A\n113, Tarun Sinha, tarun@college.edu, Section B`}
+          className="w-full px-3.5 py-2.5 text-xs font-mono bg-slate-50 border border-slate-200 rounded-lg text-slate-900 placeholder:text-slate-400 focus:bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500/25 focus:border-indigo-600"
         />
 
         {bulkResult && (
-          <p className="text-xs font-medium text-emerald-700 bg-emerald-50 border border-emerald-200 rounded-md px-3 py-2">
+          <p className="text-xs font-medium text-emerald-700 bg-emerald-50 border border-emerald-200 rounded-lg px-3 py-2">
             {bulkResult}
           </p>
         )}
 
         <div className="flex items-center justify-between gap-3">
           <span className="text-xs text-slate-500 tabular-nums">
-            {parsedBulk.length} valid row{parsedBulk.length === 1 ? '' : 's'} detected
+            {parsedBulk.length} student{parsedBulk.length === 1 ? '' : 's'} ready
           </span>
           <button
             type="button"
             onClick={handleBulkImport}
             disabled={parsedBulk.length === 0}
-            className="inline-flex items-center gap-1.5 px-3.5 py-2 text-xs font-medium rounded-md border border-slate-200 bg-white text-slate-700 hover:bg-slate-50 disabled:opacity-40 disabled:cursor-not-allowed transition-colors whitespace-nowrap shrink-0 cursor-pointer"
+            className="inline-flex items-center gap-1.5 px-4 py-2 text-xs font-semibold rounded-lg border border-indigo-200 bg-indigo-50 text-indigo-700 hover:bg-indigo-100 disabled:opacity-40 disabled:cursor-not-allowed transition-colors whitespace-nowrap shrink-0 cursor-pointer"
           >
             <Upload className="w-3.5 h-3.5" aria-hidden="true" />
-            <span>Import Roster</span>
+            <span>Import List</span>
           </button>
         </div>
       </div>
