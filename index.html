@@ -1,86 +1,27 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Student Attendance System</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-
-<body>
-
-    <div class="layout">
-
-        <!-- LEFT SIDE: options -->
-        <section class="sidebar">
-            <h1>🎓 Attendance</h1>
-
-            <div class="menu">
-                <button class="menu-btn" onclick="showPanel('register', this)">📝 Register Student</button>
-                <button class="menu-btn active" onclick="showPanel('mark', this)">✅ Mark Attendance</button>
-                <button class="menu-btn" onclick="showPanel('view', this)">🔍 View Attendance</button>
-                <button class="menu-btn" onclick="showPanel('report', this)">📊 Generate Report</button>
-            </div>
-        </section>
-
-        <!-- RIGHT SIDE: content -->
-        <section class="main">
-
-            <h2>Today at a Glance</h2>
-            <div class="stats">
-                <div class="stat total"><h3 id="statTotal">0</h3><p>Total Students</p></div>
-                <div class="stat good"><h3 id="statPresent">0</h3><p>Present</p></div>
-                <div class="stat bad"><h3 id="statAbsent">0</h3><p>Absent</p></div>
-                <div class="stat rate"><h3 id="statPending">0</h3><p>Not Marked</p></div>
-            </div>
-
-            <div class="panel-area">
-
-                <!-- Register -->
-                <div class="panel" id="register">
-                    <h2>Register Student</h2>
-                    <div class="form-row">
-                        <input type="text" id="nameInput" placeholder="Student name">
-                        <input type="number" id="rollInput" placeholder="Roll number">
-                        <button class="primary" onclick="addStudent()">Add Student</button>
-                    </div>
-                    <p id="message"></p>
-                </div>
-
-                <!-- Mark -->
-                <div class="panel active" id="mark">
-                    <h2>Mark Attendance</h2>
-                    <div id="markList"></div>
-                </div>
-
-                <!-- View -->
-                <div class="panel" id="view">
-                    <h2>View Attendance</h2>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Roll</th>
-                                <th>Name</th>
-                                <th>Today</th>
-                                <th>Attendance</th>
-                            </tr>
-                        </thead>
-                        <tbody id="viewBody"></tbody>
-                    </table>
-                </div>
-
-                <!-- Report -->
-                <div class="panel" id="report">
-                    <h2>Attendance Report</h2>
-                    <div id="reportBox"></div>
-                </div>
-
-            </div>
-
-        </section>
-
-    </div>
-
-    <script src="script.js"></script>
-</body>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ClassLedger — Student Attendance System</title>
+    <meta
+      name="description"
+      content="Institutional student attendance management platform for daily roll call, student registration, historical records, and compliance reporting."
+    />
+    <meta property="og:title" content="ClassLedger — Student Attendance System" />
+    <meta
+      property="og:description"
+      content="Institutional student attendance management platform for daily roll call, student registration, historical records, and compliance reporting."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400..700;1,9..40,400..700&family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@500;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="bg-slate-50 text-slate-900 antialiased selection:bg-blue-100 selection:text-blue-900">
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
 </html>

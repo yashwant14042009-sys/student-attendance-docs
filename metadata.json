@@ -1,0 +1,5 @@
+{
+  "name": "Student Attendance System",
+  "description": "Web-based application for registering students, marking daily attendance, viewing records, and generating attendance reports.",
+  "requestFramePermissions": []
+}
