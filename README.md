@@ -2,33 +2,35 @@
 
 ## Introduction
 
-A colorful, easy-to-understand web application built to help teachers and students manage daily classroom attendance without paper registers.
+The Student Attendance Management System is a web-based application used to manage student attendance.
 
 ## Features
 
-- **Today at a Glance**: Bright color-coded cards showing Total Students, Present, Absent, and Not Marked counts.
-- **Mark Attendance**: One-click green **Present** and red **Absent** buttons, plus a **Rapid Roll Call** mode with keyboard keys (`P`, `A`, `←`, `→`).
-- **Register Student**: Simple form to add new students by Name and Roll Number, plus a quick list importer.
-- **View Attendance**: Search, sort, and click any student row to edit details or view their session history.
-- **Attendance Report**: Class Average, Best Attendance, colorful attendance bar chart, Below 75% Alert list, CSV export, Print Report, and **Download PPT (.pptx)**.
+- Student registration
+- Mark attendance
+- View attendance
+- Generate attendance reports
 
 ## Technologies Used
 
-- HTML5, CSS3 & Tailwind CSS
-- React & TypeScript
-- Node.js & Express
-- `pptxgenjs` for live PowerPoint (`.pptx`) export
+- HTML
+- CSS
+- JavaScript
 
-## Photos & Presentation
+## Installation
 
-- `photos/1_mark_attendance.jpg` — Mark Attendance screen with colorful stat cards
-- `photos/2_register_and_view.jpg` — Register Student form and attendance table
-- `photos/3_attendance_report.jpg` — Attendance Report with colorful bar charts
-- `docs/Student_Attendance_Presentation.pptx` — Matching project presentation deck
+1. Download the project.
+2. Open the project folder.
+3. Open index.html in a browser.
 
-## How to Run
+## Usage
 
-```bash
-npm install
-npm run dev
-```
+1. Login to the system.
+2. Select the class.
+3. Mark attendance.
+4. Generate the report.
+
+## Future Enhancements
+
+- Mobile application
+- Cloud database
